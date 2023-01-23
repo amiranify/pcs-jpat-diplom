@@ -21,13 +21,11 @@ public class Client {
         return task.get(index);
     }
     public static void main(String... args) {
-
         try (Socket clientSocket = new Socket("localhost", 8989);
              PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
-            writer.println("{ \"type\": \"ADD\", \"task\": \"task #" + pickRandom() + "\" }");
-            System.out.println(in.readLine());
-
+            writer.println("{ \"type\": \"ADD\", \"task\": \" task : " + pickRandom() + "\" }");
+            System.out.println("type: " + TodoServer.Operation.Type.ADD  + in.readLine());
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
